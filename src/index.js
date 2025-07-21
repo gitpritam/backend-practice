@@ -5,6 +5,14 @@ const PORT = 5001;
 
 app.use(express.json());
 
+app.get("/client", (req,res)=>{
+  return res.status(200).json({
+    success: true,
+    message:"Client endpoint",
+  })
+});
+
+
 //api
 app.get("/", (req, res) => {
   //   return res.send("Hello World!");
