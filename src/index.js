@@ -1,57 +1,28 @@
 import express from "express";
+import { postStudentController } from "./controllers/students/postStudents.controller.js";
+import { getAllStudentsController } from "./controllers/students/getAllStudents.controller.js";
+import { getStudentController } from "./controllers/students/getStudent.controller.js";
 
 const app = express();
 const PORT = 5001;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-//api
-app.get("/", (req, res) => {
-  //   return res.send("Hello World!");
-  return res.status(200).json({ success: true, message: "Hello World!" });
-});
+//student
+//get all students
+app.get("/students", getAllStudentsController);
 
-// //api
-// app.get("/user", (req, res) => {
-//   return res.status(200).json({
-//     success: true,
-//     message: "User endpoint",
-//     result: { name: "pritam", age: 25 },
-//   });
-// });
+//get student by id
+app.get("/students/:college_id", getStudentController);
 
-//query params  ->   ?key=value       -> ?key=value&key2=value2&key3=value3
-app.get("/user", (req, res) => {
-  const { sort, limit, page } = req.query;
-  console.log("Query Params:", sort, limit, page);
+//post student (create student)
+app.post("/students", postStudentController);
 
-  return res.status(200).json({
-    success: true,
-    message: `${sort} ${limit} ${page}`,
-    result: { name: "pritam", age: 25 },
-  });
-});
-
-//url params  ->   /user/1
-app.get("/user/:id", (req, res) => {
-  const { id } = req.params;
-  console.log("URL Params:", id);
-
-  return res.status(200).json({
-    success: true,
-    message: `User ID: ${id}`,
-    result: { name: "pritam", age: 25 },
-  });
-});
-
-//body data
-app.post("/login", (req, res) => {
-  //   const loginData = req.body;
-  const { email, password } = req.body;
-  console.log("Login Data:", email, password);
-
-  return res.status(200).json({ success: true, message: "Login successful!" });
-});
+//put student (update student)
+// app.put("/students/:college_id", updateStudentController);
+//delete student (remove student)
+// app.delete("/students/:college_id", deleteStudentController);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
