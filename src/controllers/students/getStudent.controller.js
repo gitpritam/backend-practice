@@ -1,4 +1,4 @@
-export const getStudentController = async (req, res) => {
+const getStudentController = async (req, res) => {
   try {
     const { college_id } = req.params;
     console.log(college_id);
@@ -29,3 +29,5 @@ export const getStudentController = async (req, res) => {
       .json({ success: false, message: "Internal server error" });
   }
 };
+
+export default getStudentController;
