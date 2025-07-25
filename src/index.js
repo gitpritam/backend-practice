@@ -1,8 +1,10 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import { MainRrouter } from "./routes/index.js";
 
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
