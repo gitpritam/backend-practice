@@ -2,6 +2,8 @@ import { Router } from "express";
 import { getAllStudentsController } from "../controllers/students/getAllStudents.controller.js";
 import getStudentController from "../controllers/students/getStudent.controller.js";
 import { postStudentController } from "../controllers/students/postStudents.controller.js";
+import updateStudentController from "../controllers/students/updateStudent.controller.js";
+import deleteStudentController from "../controllers/students/deleteStudent.controller.js";
 
 export const StudentRouter = Router();
 //student
@@ -9,12 +11,12 @@ export const StudentRouter = Router();
 StudentRouter.get("/", getAllStudentsController);
 
 //get student by id
-StudentRouter.get("/:college_id", getStudentController);
+StudentRouter.get("/:student_id", getStudentController);
 
 //post student (create student)
 StudentRouter.post("/", postStudentController);
 
 //put student (update student)
-// StudentRouter.put("/students/:college_id", updateStudentController);
+StudentRouter.patch("/:student_id", updateStudentController);
 //delete student (remove student)
-// StudentRouter.delete("/students/:college_id", deleteStudentController);
+StudentRouter.delete("/:student_id", deleteStudentController);

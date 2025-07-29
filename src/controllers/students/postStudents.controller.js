@@ -1,33 +1,47 @@
+import StudentModel from "../../models/student.model.js";
+
 export const postStudentController = async (req, res) => {
   try {
-    const { name, college_id, dept, year, dob } = req.body;
+    const { name, dept, year, dob, phone, email } = req.body;
 
-    if (!name || !college_id || !dept || !year || !dob) {
+    if (!name || !dept || !year || !dob || !phone || !email) {
       return res
         .status(400)
         .json({ success: false, message: "All fields are mandatory" });
     }
 
+    const student_id = crypto.randomUUID();
+    console.log(student_id);
+    if (!student_id) {
+      return res.status(400).json({ message: "Student id not generated" });
+    }
+
     //create payload
     const payload = {
-      name, //name:name
-      college_id,
+      student_id,
+      name,
+      phone,
+      email,
       dept,
-      year,
-      dob,
+      current_year: Number(year),
+      dob: new Date(dob),
     };
     console.log(payload);
     //upload to db
-    // const studentData =await
-
+    const studentData = await StudentModel.create(payload);
+    if (!studentData) {
+      return res
+        .status(400)
+        .json({ message: "Student profile not submitted successfully" });
+    }
     return res.status(201).json({
       success: true,
       message: "Student profile created",
-      //   result: studentData,
+      result: studentData,
     });
   } catch (error) {
     return res
       .status(500)
-      .json({ success: false, message: "Internal server error" });
+      .json({ success: false, message: "Internal server error", error });
   }
 };

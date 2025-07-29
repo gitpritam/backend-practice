@@ -1,6 +1,6 @@
 import StudentModel from "../../models/student.model.js";
 
-const getStudentController = async (req, res) => {
+const deleteStudentController = async (req, res) => {
   try {
     const { student_id } = req.params;
     console.log(student_id);
@@ -22,10 +22,11 @@ const getStudentController = async (req, res) => {
         .json({ success: false, message: "student not found with this id" });
     }
 
-    return res.status(200).json({
+    await StudentModel.findOneAndDelete({ student_id });
+
+    return res.status(204).json({
       success: true,
-      message: "Student data found successfully",
-      result: studentData,
+      message: "Student data deleted successfully",
     });
   } catch (error) {
     return res
@@ -34,4 +35,4 @@ const getStudentController = async (req, res) => {
   }
 };
 
-export default getStudentController;
+export default deleteStudentController;

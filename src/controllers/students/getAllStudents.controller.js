@@ -1,16 +1,22 @@
+import StudentModel from "../../models/student.model.js";
+
 export const getAllStudentsController = async (req, res) => {
   try {
     //db query ->fetch all student data
-    // const studentsData = await
+    const studentsData = await StudentModel.find()
+      .select("-__v")
+      .sort("-updatedAt");
 
-    // if(!studentsData){
-    //     return res.status(404).json({success:false,message:"No students found"});
-    // }
+    if (!studentsData || studentsData.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No students found" });
+    }
 
     return res.status(200).json({
       success: true,
       message: "Students data found successfully",
-      // result: studentsData,
+      result: studentsData,
     });
   } catch (error) {
     return res
