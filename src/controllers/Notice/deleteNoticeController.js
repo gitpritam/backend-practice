@@ -1,4 +1,4 @@
-import NoticeModel from "../../models/notice.model";
+import NoticeModel from "../../models/notice.model.js";
 
 const deleteNoticeController = async (req, res) => {
   try {

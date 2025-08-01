@@ -1,23 +1,24 @@
-import EventModel from "../../models/event.model";
+import EventModel from "../../models/event.model.js";
 
-const deleteEventController= async (req, res) => {
+const deleteEventController = async (req, res) => {
   try {
-    const { title } = req.params;
-    console.log(title);
+    const { _id } = req.params;
+    console.log(_id);
 
-    if (!title) {
+    if (!_id) {
       return res
         .status(400)
-        .json({ success: false, message: "Title is required" });
+        .json({ success: false, message: "_id is required" });
     }
-    const eventData = await EventModel.findOne({ title });
+    const eventData = await EventModel.findOne({ _id });
     if (!eventData) {
       return res
         .status(404)
         .json({ success: false, message: "Event not found with this name" });
     }
 
-    await EventModel.findOneAndDelete({ notice_id });
+    // await EventModel.findOneAndDelete({ _id });
+    await EventModel.findByIdAndDelete(_id);
 
     return res.status(204).json({
       success: true,

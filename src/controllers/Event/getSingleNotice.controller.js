@@ -1,16 +1,16 @@
-import EventModel from "../../models/event.model";
+import EventModel from "../../models/event.model.js";
 
 export const getSingleEventController = async (req, res) => {
   try {
-    const { title } = req.params;
+    const { _id } = req.params;
 
-    if (!title) {
+    if (!_id) {
       return res.status(406).json({
         success: false,
-        message: "Please enter the title",
+        message: "Please enter the _id",
       });
     }
-    const eventData = await EventModel.findOne({ title });
+    const eventData = await EventModel.findById(_id);
     if (!eventData) {
       return res.status(404).json({
         success: false,
@@ -31,4 +31,3 @@ export const getSingleEventController = async (req, res) => {
   }
 };
 export default getSingleEventController;
-

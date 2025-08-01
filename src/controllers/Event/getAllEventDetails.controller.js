@@ -1,11 +1,8 @@
-import EventModel from "../../models/event.model";
-
+import EventModel from "../../models/event.model.js";
 
 export const getAllEventDetailsControlller = async (req, res) => {
   try {
-    const eventData = await EventModel.find()
-      .select("-__v")
-      .sort("-updatedAt");
+    const eventData = await EventModel.find().select("-__v").sort("-updatedAt");
 
     if (!eventData || eventData.length === 0) {
       return res
