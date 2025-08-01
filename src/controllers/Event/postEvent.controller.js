@@ -1,3 +1,5 @@
+import EventModel from "../../models/event.model";
+
 export const postEventController = async (req, res) => {
   try {
     const { title,details, venue } = req.body;
@@ -9,15 +11,18 @@ export const postEventController = async (req, res) => {
     }
     const payload = {
       title,
-      description,
-      notice_id: crypto.randomUUID(),
+      details,
+      venue
     };
-    if (year) payload.year = year;
-
+    const eventData = await EventModel.create(payload);
+    if (!eventData) {
+      return res
+        .status(400)
+        .json({ message: "Event not submitted successfully" });
+    }
     return res.status(201).json({
       success: true,
-      message: "Notice posted successfully",
-      //   result:
+      message: "Event posted successfully",
     });
   } catch (error) {
     return res.status(500).json({
