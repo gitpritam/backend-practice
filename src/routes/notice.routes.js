@@ -1,5 +1,5 @@
 import { Router } from "express";
-import getSingleNoticeDetailsController from "../controllers/Notice/getRecentNotice.controller.js";
+import getSingleNoticeDetailsController from "../controllers/Notice/getSingleNotice.controller.js";
 import { getAllNoticeController } from "../controllers/Notice/getAllNotice.controller.js";
 import { postNoticeController } from "../controllers/Notice/postNoticeController.js";
 import deleteNoticeController from "../controllers/Notice/deleteNoticeController.js";
