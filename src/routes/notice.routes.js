@@ -6,9 +6,9 @@ import deleteNoticeController from "../controllers/Notice/deleteNoticeController
 
 const NoticeRouter = Router();
 
-NoticeRouter.get("/:notice_id", getSingleNoticeDetailsController);
 NoticeRouter.get("/", getAllNoticeController);
+NoticeRouter.get("/:notice_id", getSingleNoticeDetailsController);
 NoticeRouter.post("/", postNoticeController);
-NoticeRouter.delete("/", deleteNoticeController);
+NoticeRouter.delete("/:notice_id", deleteNoticeController);
 
 export default NoticeRouter;

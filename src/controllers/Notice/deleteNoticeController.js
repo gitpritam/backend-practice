@@ -10,13 +10,13 @@ const deleteNoticeController = async (req, res) => {
         .status(400)
         .json({ success: false, message: "Notice id is required" });
     }
-    await NoticeModel.findOneAndDelete({ notice_id });
-
+    const noticeData = await NoticeModel.findOne({ notice_id });
     if (!noticeData) {
       return res
         .status(404)
         .json({ success: false, message: "Notice not found with this id" });
     }
+
     await NoticeModel.findOneAndDelete({ notice_id });
 
     return res.status(204).json({
@@ -28,5 +28,5 @@ const deleteNoticeController = async (req, res) => {
       .status(500)
       .json({ success: false, message: "Internal server error", error });
   }
-  };
-  export default deleteNoticeController;
+};
+export default deleteNoticeController;
