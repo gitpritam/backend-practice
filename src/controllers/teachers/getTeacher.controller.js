@@ -18,4 +18,5 @@ export const getTeachercontroller = async(req,res)=>{
         });
     }
 
-    }
+    };
+    export default getTeachercontroller;

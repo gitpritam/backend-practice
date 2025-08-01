@@ -10,3 +10,8 @@ TeacherRouter.get("/", getAllTeachersController);
 TeacherRouter.get("/:teacher_id", getTeachercontroller);
 //post teacher
 TeacherRouter.post("/", postTeacherController);
+//put teacher
+// TeacherRouter.patch("/name:", updateTeacherController);
+//delete teacher
+// TeacherRouter.delete("/", deleteTeacherController);
+
