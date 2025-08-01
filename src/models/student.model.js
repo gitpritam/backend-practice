@@ -41,6 +41,9 @@ const StudentSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    profile_photo: {
+      type: String,
+    },
   },
   {
     timestamps: true,

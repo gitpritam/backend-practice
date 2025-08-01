@@ -26,6 +26,9 @@ export const postStudentController = async (req, res) => {
       current_year: Number(year),
       dob: new Date(dob),
     };
+    if (req.file) {
+      payload.profile_photo = req.file.path;
+    }
     console.log(payload);
     //upload to db
     const studentData = await StudentModel.create(payload);
